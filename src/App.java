@@ -1,8 +1,12 @@
+import java.util.Arrays;
+import java.util.List;
+
 public class App {
     public static void main(String[] args) throws Exception {
-        runEjerciciosPD();
+        //runEjerciciosPD();
+        runMaze();
     }
-
+/* 
     public static void runEjerciciosPD() {
 
         EjerciciosPd ejerciciosPd = new EjerciciosPd();
@@ -20,5 +24,34 @@ public class App {
         long end1 = System.nanoTime();
         long duration1 = end1 - start1;
         System.out.println("Resultado = " + resultado1 + " en tiempo = " + duration1 + " nanosegundos");
+        
+    }
+        */
+
+    public static void runMaze() {
+        boolean[][] predefineMaze = {
+            {true, true, true, true},
+            {false, true, true, true},
+            {true, true, false, false},
+            {true, true, true, true}
+        };
+
+        System.out.println("Ariel Badillo");
+        Maze maze = new Maze(predefineMaze);
+        System.out.println("Laberinto Cargado");
+        maze.printMaze();
+
+        Cell start = new Cell(0, 0);
+        Cell end = new Cell(3, 3);
+
+        List<MazeSolver> solvers = Arrays.asList(
+            new MazeSolverRecursivo()
+        );
+        
+        MazeSolver solver = solvers.get(0);
+        List<Cell> path;
+        path = solver.getPath(maze.getGrid(), start, end);
+        System.out.println(path);
+
     }
 }
